@@ -116,6 +116,14 @@ has full context of what the tool actually did before generating the output.
 3. Run: `./mvnw spring-boot:run`
 4. Open: `http://localhost:8081/easypay-agent`
 
+## Screenshots
+
+### Input Form
+![Input Form](docs/images/screenshot-input.png)
+
+### Easy Pay Agent Result
+![Easy Pay Result](docs/images/screenshot-report.png)
+
 ## Project Structure
 
 ```
