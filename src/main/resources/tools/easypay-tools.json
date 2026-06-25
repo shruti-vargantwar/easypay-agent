@@ -1,0 +1,27 @@
+[
+  {
+    "name": "extendGracePeriod",
+    "description": "Extends the Easy Pay retry date for a loyal customer with low fraud risk.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "customerId": { "type": "string" },
+        "days": { "type": "integer" },
+        "reason": { "type": "string" }
+      },
+      "required": ["customerId", "days", "reason"]
+    }
+  },
+  {
+    "name": "freezeAccount",
+    "description": "Freezes the account and pauses pending shipments due to high fraud risk.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "customerId": { "type": "string" },
+        "reason": { "type": "string" }
+      },
+      "required": ["customerId", "reason"]
+    }
+  }
+]

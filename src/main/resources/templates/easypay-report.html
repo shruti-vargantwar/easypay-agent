@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Easy Pay Agent Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #333;
+        }
+        h1 {
+            color: #1565C0;
+            border-bottom: 2px solid #1565C0;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #444;
+            margin-top: 30px;
+        }
+        .card {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 16px 20px;
+            margin-top: 10px;
+        }
+        .card p {
+            margin: 6px 0;
+        }
+        .tool-called {
+            background: #eaf4fb;
+            border-left: 4px solid #2196F3;
+            border-radius: 4px;
+            padding: 16px 20px;
+            margin-top: 10px;
+        }
+        .tool-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #1565C0;
+        }
+        .tool-params {
+            margin-top: 8px;
+            font-size: 0.9em;
+            color: #555;
+        }
+        .freeze {
+            background: #fdecea;
+            border-left: 4px solid #e53935;
+        }
+        .freeze .tool-name {
+            color: #b71c1c;
+        }
+        .message-box {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 16px 20px;
+            margin-top: 10px;
+            white-space: pre-line;
+            line-height: 1.6;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: #1565C0;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1>Easy Pay Agent Result</h1>
+
+<h2>Customer Profile</h2>
+<div class="card">
+    <p><strong>Name:</strong> <span th:text="${report.customer.name}"></span></p>
+    <p><strong>Membership Years:</strong> <span th:text="${report.customer.membershipYears}"></span></p>
+    <p><strong>Total Purchases:</strong> <span th:text="${report.customer.totalPurchases}"></span></p>
+    <p><strong>Prior Declines:</strong> <span th:text="${report.customer.priorDeclines}"></span></p>
+    <p><strong>Failed Payment:</strong> $<span th:text="${report.customer.failedAmount}"></span>
+        for <span th:text="${report.customer.productName}"></span></p>
+</div>
+
+<h2>Tool Called</h2>
+<div th:class="${report.toolCalled == 'freezeAccount'} ? 'tool-called freeze' : 'tool-called'">
+    <div class="tool-name" th:text="${report.toolCalled}"></div>
+    <div class="tool-params" style="white-space: pre-line;" th:text="${report.formattedToolParameters}"></div>
+</div>
+
+<h2>Generated Message</h2>
+<div class="message-box" th:text="${report.generatedMessage}"></div>
+
+<a class="back-link" href="/easypay-agent">Run Again</a>
+</body>
+</html>
