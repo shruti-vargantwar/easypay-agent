@@ -58,11 +58,44 @@
         button:hover {
             background-color: #0D47A1;
         }
+        button:disabled {
+            background-color: #90CAF9;
+            cursor: not-allowed;
+        }
         .subtitle {
             font-size: 0.85em;
             color: #888;
             margin-top: -16px;
             margin-bottom: 20px;
+        }
+        .loading {
+            display: none;
+            margin-top: 24px;
+        }
+        .loading-text {
+            color: #1565C0;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+        }
+        .progress-bar-track {
+            width: 100%;
+            background: #e3f2fd;
+            border-radius: 4px;
+            height: 8px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 8px;
+            width: 0%;
+            background: #1565C0;
+            border-radius: 4px;
+            animation: fillBar 8s ease-in-out forwards;
+        }
+        @keyframes fillBar {
+            0%   { width: 0%; }
+            60%  { width: 75%; }
+            90%  { width: 90%; }
+            100% { width: 95%; }
         }
     </style>
 </head>
@@ -71,7 +104,7 @@
     <h1>Easy Pay Recovery Agent</h1>
     <p>Select a customer scenario to evaluate a failed Easy Pay installment payment.</p>
 
-    <form th:action="@{/easypay-agent}" method="post">
+    <form th:action="@{/easypay-agent}" method="post" id="agentForm">
         <label>Select Customer Scenario</label>
         <select name="customerId">
             <option value="A">Customer A -- Loyal (8 years, 45 purchases, 0 prior declines) -- $400 Dyson Vacuum</option>
@@ -81,8 +114,23 @@
             <option value="E">Customer E -- New High Value (0 years, 2 purchases, 1 prior decline) -- $1,500 Diamond Bracelet</option>
         </select>
         <p class="subtitle">Claude will evaluate the profile and call the appropriate tool.</p>
-        <button type="submit">Run Agent</button>
+        <button type="submit" id="submitBtn">Run Agent</button>
     </form>
+
+    <div class="loading" id="loadingSection">
+        <p class="loading-text">Claude is evaluating the customer profile and selecting the appropriate action...</p>
+        <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+    </div>
 </div>
+
+<script>
+    document.getElementById('agentForm').addEventListener('submit', function() {
+        document.getElementById('submitBtn').disabled = true;
+        document.getElementById('submitBtn').textContent = 'Running...';
+        document.getElementById('loadingSection').style.display = 'block';
+    });
+</script>
 </body>
 </html>
