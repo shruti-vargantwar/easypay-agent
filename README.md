@@ -4,8 +4,7 @@ An AI-powered agentic workflow built with Spring Boot and Claude (Anthropic API)
 
 ## Live Demo
 
-Primary (Railway - always on, fastest response):
-https://easypay-agent-production.up.railway.app/easypay-agent
+Deployed on Railway: https://easypay-agent-production.up.railway.app/easypay-agent
 
 ## Architecture Diagram
 
